@@ -9,15 +9,18 @@ const apps = require('./playstore.js')
 
 app.get('/apps', (req, res) => {
   // ALL OUR CODE HERE
+  
   const { sort, genres } = req.query;
-/*
-  let results = apps
-        .filter(app => 
-            app
-                .App
-                .toLocaleLowerCase()
-                .includes(search.toLocaleLowerCase()));
-    */
+  
+  if(sort == 'Rating'|| sort == 'App') {
+    
+    apps.sort(function(a, b) {
+      return a[sort] > b[sort] ? 1: a[sort] < b[sort] ? -1: 0;
+    });
+  }
+
+
+    
   res
     .json(apps);
 });
