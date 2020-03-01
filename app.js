@@ -18,9 +18,16 @@ app.get('/apps', (req, res) => {
       return a[sort] > b[sort] ? 1: a[sort] < b[sort] ? -1: 0;
     });
   }
-
-
-    
+  /*
+  if(genres == 'Action' || genres == 'Puzzle' || genres == 'Strategy' || genres == 'Casual' || genres == 'Arcade' || genres == 'Card') {
+    console.log(genres)
+    selected = genres
+    var genreList = apps.filter(function(selected) {
+      return selected.apps(genres == selected);
+    });
+    console.log(genreList);
+  }
+*/
   res
     .json(apps);
 });
