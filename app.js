@@ -9,7 +9,7 @@ const apps = require('./playstore.js')
 app.get('/', (req, res) => {
   res
     .status(200)
-    .send('Hello Express!');
+    .send('Home Page!');
 });
 
 app.get('/apps', (req, res) => {
