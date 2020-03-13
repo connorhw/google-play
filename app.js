@@ -6,6 +6,11 @@ const app = express();
 app.use(morgan('common')); // let's see what 'common' format looks like
 const apps = require('./playstore.js')
 
+app.get('/', (req, res) => {
+  res
+    .status(200)
+    .send('Hello Express!');
+});
 
 app.get('/apps', (req, res) => {
   // ALL OUR CODE HERE
@@ -17,6 +22,14 @@ app.get('/apps', (req, res) => {
     apps.sort(function(a, b) {
       return a[sort] > b[sort] ? 1: a[sort] < b[sort] ? -1: 0;
     });
+  }
+  if(genres == 'Action' || genres == 'Puzzle' || genres == 'Strategy' || genres == 'Casual' || genres == 'Arcade' || genres == 'Card') {
+    console.log(genres)
+    selected = genres
+    var genreList = apps.filter(function(selected) {
+      return selected.apps(genres == selected);
+    });
+    console.log(genreList);
   }
   /*
   if(genres == 'Action' || genres == 'Puzzle' || genres == 'Strategy' || genres == 'Casual' || genres == 'Arcade' || genres == 'Card') {
@@ -32,6 +45,9 @@ app.get('/apps', (req, res) => {
     .json(apps);
 });
 
+module.exports = app;
+ /*
 app.listen(8000, () => {
   console.log('Server started on PORT 8000');
 });
+*/
