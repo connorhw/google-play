@@ -16,19 +16,29 @@ describe('Google Playstore', () => {
           .then(res => {
               //console.log(res.body)
               expect(res.body).to.be.an('array');
-              for(i=0; i<res.body.length; i++){
+              for(i=0; i<res.body.length; i++) {
                   if(i>0) {
-                   expect(res.body[i].Rating).to.be.least(res.body[i-1].Rating)
+                   expect(res.body[i].Rating).to.be.least(res.body[i-1].Rating) //least if like toBeGreaterThanOrEqualTo from jest
                   }
               }
           })
     });
-    /*
-    it('should sort apps', () => {
+    it('should return apps from a specific genre: Action', () => {
         return supertest(app)
-          .get('/apps')
-          .query({ sort: 'App' })
-          //.expect(200, '');
+        .get('/apps')
+        .query({ filter: 'Genres' })
+        .expect(200)
+        .then(res => {
+            expect(res.body).to.be.an('array');
+            var apps = res.body
+            selected = 'Action'
+            
+            var results = apps.filter(function(Genres) {
+                return Genres == selected;
+
+            })
+            
+        })
     });
-    */
+    
   });
